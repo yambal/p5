@@ -7,6 +7,8 @@
 
 let capture;
 const images = []
+let count = 0
+const slitheight = 10
 
 function setup() {
   createCanvas(640, 480);
@@ -18,20 +20,18 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  //background(220);
+  count++
 
-  //カメラからの映像はcaptureで利用できるが一旦getしてイメージとして扱うほうが軽量
-  let img = capture.get();
-  images.push(img)
-  if(images.length > 100){
-    const firstImg = images.shift()
-    for(i = 0; i < 100; i++) {
-      const cImg = images[i]
-      image(img, 0, i * 10);
-    }
+  if(count % 2 == 0){
+    let img = capture.get();
+    images.push(img)
   }
-
-  //これ以降は画像の再構成の作例などを参照し，点描などが可能
-
-  image(img, 0, 0);
+    if(images.length > 50){
+      images.shift()
+      for(i = 0; i < 50; i++) {
+        const cImg = images[49-i]
+        image(cImg, 0, i * 12, 600, 12, 0, i * 12, 600, 12);
+      }
+    }
 }
