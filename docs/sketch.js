@@ -1,18 +1,10 @@
 let mic;
 
 function setup() {
-  createCanvas(710, 200);
-
-
-}
-
-function mousePressed(){
-    // Create an Audio input
-    mic = new p5.AudioIn();
-
-    // start the Audio Input.
-    // By default, it does not .connect() (to the computer speakers)
-    mic.start();
+  let cnv = createCanvas(710, 200);
+  cnv.mousePressed(userStartAudio);
+  mic = new p5.AudioIn();
+  mic.start();
 }
 
 function draw() {
@@ -31,3 +23,25 @@ function draw() {
     ellipse(width / 2, h - 25, 50, 50);
   }
 }
+
+/* https://editor.p5js.org/kaori/sketches/nZuHBaT2 */
+
+/*
+function setup() {
+  // mimics the autoplay policy
+  getAudioContext().suspend();
+
+  let mySynth = new p5.MonoSynth();
+
+  // This won't play until the context has resumed
+  mySynth.play('A6');
+}
+function draw() {
+  background(220);
+  textAlign(CENTER, CENTER);
+  text(getAudioContext().state, width/2, height/2);
+}
+function mousePressed() {
+  userStartAudio();
+}
+*/
